@@ -1,0 +1,24 @@
+Context es un manejador de estados (como Redux). Tanto Context como Redux usan reducers.
+
+Context resulta muy util de implementar cuando:
+- Tenemos un componente que tiene un hijo, ese hijo tiene otro hijo que le debe pasar data a otro componente. 
+Es decir, cuando resulta complejo el pasaje de props entre los components.
+Puede ocurrir que tenga componentes que no sean "Padre" e "Hijo" y con AuthContext puedo ofrecer que uno obtenga la data
+del otro.
+
+En el componente UserState hacemos uso de UserContext. Al engrapar todo en las etiquetas UserContext.Provider.
+Con el value={} decimos que todos los componentes que esten dentro tendran el acceso a el estado definido, 
+en este caso seria pasamos el state y las funciones ->
+
+value={{
+      users: state.users,
+      selectedUser: state.selectedUser,
+      getUsers: getUsers,
+      getProfile: getProfile
+}}
+
+(que luego con el reducer se ira modificando)
+
+UserContext -> se crea el Context
+UserState -> utiliza el UserReducer, define metodos y hace uso de UserContext.Provider para proveer a los componentes hijos
+Profile y UserList de nuestro Context.
